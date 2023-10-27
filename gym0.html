@@ -1,0 +1,68 @@
+
+<head>
+    <link rel="stylesheet" href="gymstyle.css">
+    <script src="https://unpkg.com/read-excel-file@4.x/bundle/read-excel-file.min.js"></script>
+</head>
+<body style="background-color: rgb(230, 215, 245);">
+    <div >
+        <IMG SRC="https://cdn.discordapp.com/emojis/1085174239960760330.gif"   class ="turtle" >
+    </div>
+    <p class="head1">Yen 客家減肥大法！</p>
+    <p class="head2">"不一定要認真減肥，但一定不能亂花錢！"</p>
+    <p class="head3">快來試試一分鐘花多少錢！</p>
+    <p class="head4">目標是低於0.5！</p>
+    <label for="input" class="custom-file-upload">
+        <i class="fa fa-cloud-upload" style="text-align: center;"></i> Go!
+    </label>
+    <input id="input" type="file" style="text-align: center;"/>
+    
+    <table id="tbl-data"></table>
+
+    <div id="wow"> 
+        <img src="https://cdn.discordapp.com/emojis/1079820470997757952.gif" class="turtle"> 
+    </div>
+    
+    
+    
+    <script>
+        var date1,date2;
+        date1 = new Date("03/15/2023"); 
+        date2 = new Date();
+        
+        var time_difference = date2.getTime() - date1.getTime();  
+        var days = time_difference / (1000 * 60 * 60 * 24); 
+        days = Math.ceil(days);
+
+        var price = 30*days+1000/days; 
+        var minutes = 0;
+        
+
+        var input = document.getElementById('input');
+        input.addEventListener('change',function(){
+            readXlsxFile(input.files[0]).then(function(data){
+                for(let i=1; i<=days+1; i++){
+                    minutes += Number(data[i][6]);
+                }
+                var cp = price/minutes;
+                var need = price / 0.5 - minutes;
+                alert("你平均一分鐘花：" + cp + "元");
+                if(cp > 0.5){
+                    alert("死胖子快去健工！胖就算了還浪費錢！\n你還需要"+ need +"分鐘！");
+                }
+                else{
+                    alert("good!!!客家人的驕傲！");
+                }
+
+
+            });
+            
+        });
+        
+
+
+    </script>   
+
+
+    <!--   <script type="module" src="gym0.js"></script>  -->
+</body>
+</html>
